@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/drawable/bg_button.xml" value="0.1025" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/drawable/bg_search.xml" value="0.1305" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/activity_detail.xml" value="0.209375" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/activity_explore.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_bookmark.xml" value="0.15" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_detail.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_explore.xml" value="0.2" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_maps.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_news.xml" value="0.16" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/fragment_profile.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_card_list_placeholder.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_bookmark.xml" value="0.21608040201005024" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_explore.xml" value="0.18" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_explore_placeholder.xml" value="0.16" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_latest.xml" value="0.21041666666666667" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_latest_placeholder.xml" value="0.2" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_news.xml" value="0.25" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/item_list_news_placeholder.xml" value="0.18" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/layout/layout_filter.xml" value="0.25" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1962962962962963" />
+        <entry key="..\:/Fred/Portofolio/Menitcom/app/src/main/res/menu/toolbar_detail_menu.xml" value="0.19907407407407407" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

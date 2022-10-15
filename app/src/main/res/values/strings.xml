@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Menit.com</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_news">News</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="tab_text_1">Business</string>
+    <string name="tab_text_2">Entertainment</string>
+    <string name="tab_text_3">General</string>
+    <string name="tab_text_4">Health</string>
+    <string name="tab_text_5">Science</string>
+    <string name="tab_text_6">Sports</string>
+    <string name="tab_text_7">Technology</string>
+
+    <string name="menu_share">Share</string>
+    <string name="menu_bookmark">Bookmark</string>
+    <string name="menu_copy_link">Copy Link</string>
+    <string name="menu_open_in_browser">Open in browser</string>
+
+    <string name="UI_copy_text">Copied to clipboard</string>
+    <string name="UI_search_hint_home"><![CDATA[Search for news & article]]></string>
+    <string name="UI_label_latest_news">Latest News</string>
+    <string name="UI_label_arround_the_world">Around the world</string>
+    <string name="UI_label_see_all">See All</string>
+    <string name="UI_desc_button_filter">This Button will show Filter of News Searching</string>
+    <string name="UI_desc_button_bookmark">This Button will bookmark News Selected</string>
+    <string name="UI_label_bookmarked_news">Bookmarked News</string>
+    <string name="UI_triple_dot">%1$s…</string>
+    <string name="UI_no_data">No Matching Searches</string>
+    <string name="UI_no_bookmark">You don\'t have any Bookmarked News</string>
+    <string name="UI_search_filter">Search Filter</string>
+    <string name="UI_share_body">"Saya sedang membaca berita %1$s di aplikasi Menit.com. Download sekarang juga di Play Store"</string>
+    <string name="UI_share_title">Share using</string>
+    <string name="UI_my_address">My Address</string>
+</resources>
