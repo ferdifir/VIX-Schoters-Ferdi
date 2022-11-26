@@ -39,10 +39,10 @@ class ExploreNewsAdapter: RecyclerView.Adapter<ExploreNewsAdapter.ListViewHolder
                 val date = Helper.convertDate(data.publishedAt.toString())
                 val desc = "$date - ${data.description}"
                 with(binding) {
-                    if (data.url!!.length > 36)
+                    if (data.url.length > 36)
                         tvListUrl.text = itemView.context.getString(R.string.UI_triple_dot, data.url.take(33))
 
-                    if (data.title.length > 77)
+                    if (data.title!!.length > 77)
                         tvListTitle.text = itemView.context.getString(R.string.UI_triple_dot, data.title.take(74))
                     else
                         tvListTitle.text = data.title

@@ -3,9 +3,7 @@ package com.ferdifir.menitcom.ui.news
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -32,6 +30,11 @@ class HomeFragment : Fragment() {
     private lateinit var newsAdapter: WorldNewsAdapter
     private lateinit var viewModel: HomeViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +46,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.apply {
+            setSupportActionBar(binding.searchNews)
+            supportActionBar?.title = null
+        }
 
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
@@ -89,10 +96,6 @@ class HomeFragment : Fragment() {
                 context as Activity,
                 Pair(binding.searchNews, "search")
             )
-        binding.searchNews.setOnClickListener {
-            intent.putExtra(Const.SEARCH_FOKUS, true)
-            startActivity(intent, optionsCompat.toBundle())
-        }
         binding.tvSeaAll.setOnClickListener {
             intent.putExtra(Const.SEARCH_FOKUS, false)
             startActivity(intent, optionsCompat.toBundle())
@@ -108,6 +111,24 @@ class HomeFragment : Fragment() {
         }.attach()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_home_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_search -> {
+                val intent = Intent(activity, ExploreActivity::class.java)
+                intent.putExtra(Const.SEARCH_FOKUS, true)
+                startActivity(intent)
+                true
+            }
+            else -> {
+                false
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -116,9 +137,9 @@ class HomeFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_3,
             R.string.tab_text_1,
             R.string.tab_text_2,
-            R.string.tab_text_3,
             R.string.tab_text_4,
             R.string.tab_text_5,
             R.string.tab_text_6,

@@ -20,10 +20,10 @@ data class ArticlesItem(
 	val source: Source? = null,
 
 	@field:SerializedName("title")
-	val title: String,
+	val title: String? = null,
 
 	@field:SerializedName("url")
-	val url: String? = null,
+	val url: String,
 
 	@field:SerializedName("content")
 	val content: String? = null

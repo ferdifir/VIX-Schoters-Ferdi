@@ -32,7 +32,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean {
-                return data == null || data.isEmpty()
+                return true
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> {

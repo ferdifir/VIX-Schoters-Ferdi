@@ -1,6 +1,5 @@
 package com.ferdifir.menitcom.data.source.local.entity
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -23,12 +22,12 @@ data class NewsEntity(
 	@ColumnInfo(name = "name")
 	val sourceName: String? = null,
 
-	@PrimaryKey
 	@ColumnInfo(name = "title")
-	val title: String,
+	val title: String? = null,
 
+	@PrimaryKey
 	@ColumnInfo(name = "url")
-	val url: String? = null,
+	val url: String,
 
 	@ColumnInfo(name = "content")
 	val content: String? = null,
@@ -36,7 +35,6 @@ data class NewsEntity(
 	@ColumnInfo(name = "isBookmarked")
 	var isBookmarked: Boolean = false,
 
-	@NonNull
 	@ColumnInfo(name = "category")
 	var category: String? = null,
 

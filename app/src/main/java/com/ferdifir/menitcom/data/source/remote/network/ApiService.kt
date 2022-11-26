@@ -10,7 +10,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("country") country: String,
         @Query("category") category: String,
-        @Query("pageSize") pageSize: Int = 100
+        @Query("pageSize") pageSize: Int = 10
     ): NewsResponse
 
     @GET("everything")

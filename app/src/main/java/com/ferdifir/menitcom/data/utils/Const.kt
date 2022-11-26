@@ -9,9 +9,9 @@ object Const {
     }
 
     val category = arrayOf(
+        "general",
         "business",
         "entertainment",
-        "general",
         "health",
         "science",
         "sports",
@@ -38,7 +38,7 @@ object Const {
     const val EXTRA_NEWS = "Extra News"
     const val COPY_TO_CLIPBOARD = "Copy to clipboard"
 
-    val myGithub = "https://github.com/ferdifir"
-    val myLinkedin = "https://www.linkedin.com/in/ferdifirmansyah/"
-    val myInstagram = "https://www.instagram.com/ferdi.doc/"
+    const val myGithub = "https://github.com/ferdifir"
+    const val myLinkedin = "https://www.linkedin.com/in/ferdifirmansyah/"
+    const val myInstagram = "https://www.instagram.com/ferdi.doc/"
 }
