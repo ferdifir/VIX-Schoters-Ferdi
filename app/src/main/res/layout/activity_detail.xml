@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context=".presentation.detail.DetailActivity">
 
     <ProgressBar
         android:id="@+id/progress"
@@ -39,14 +39,19 @@
             android:contentDescription="@string/UI_desc_button_bookmark" />
     </androidx.appcompat.widget.Toolbar>
 
-    <WebView
-        android:id="@+id/web_view"
-        style="@android:style/Widget.Material.WebView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progress" />
+        app:layout_constraintTop_toBottomOf="@id/progress">
+        <WebView
+            android:id="@+id/web_view"
+            style="@android:style/Widget.Material.WebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

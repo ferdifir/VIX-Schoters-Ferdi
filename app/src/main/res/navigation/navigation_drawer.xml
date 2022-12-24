@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_main">
+
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="com.ferdifir.menitcom.presentation.main.MainFragment"
+        android:label="Main"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/nav_event"
+        android:name="com.ferdifir.menitcom.presentation.event.EventFragment"
+        android:label="Event"
+        tools:layout="@layout/fragment_event" />
+
+    <fragment
+        android:id="@+id/nav_weather"
+        android:name="com.ferdifir.menitcom.presentation.weather.WeatherFragment"
+        android:label="Weather"
+        tools:layout="@layout/fragment_weather" />
+</navigation>

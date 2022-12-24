@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ferdifir.menitcom.data.utils.Const
-import com.ferdifir.menitcom.ui.news.NewsFragment
+import com.ferdifir.menitcom.presentation.main.news.NewsFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
 

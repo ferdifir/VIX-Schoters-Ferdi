@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.ferdifir.menitcom.databinding.ItemListBreakingNewsBinding
 import com.ferdifir.menitcom.databinding.ItemListNewsBinding
 import com.ferdifir.menitcom.domain.model.News
 
@@ -20,7 +21,7 @@ class WorldNewsAdapter: RecyclerView.Adapter<WorldNewsAdapter.ListViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = ItemListNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemListBreakingNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(view)
     }
 
@@ -32,14 +33,14 @@ class WorldNewsAdapter: RecyclerView.Adapter<WorldNewsAdapter.ListViewHolder>() 
         return listData.size
     }
 
-    inner class ListViewHolder(private val binding: ItemListNewsBinding)
+    inner class ListViewHolder(private val binding: ItemListBreakingNewsBinding)
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: News) {
             with(binding) {
-                tvListTitle.text = data.title
+                tvTitleNews.text = data.title
                 Glide.with(itemView.context)
                     .load(data.urlToImage)
-                    .into(ivListNews)
+                    .into(ivNews)
             }
         }
         init {

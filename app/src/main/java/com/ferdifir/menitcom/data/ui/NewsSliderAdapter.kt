@@ -14,11 +14,11 @@ import com.ferdifir.menitcom.R
 import com.ferdifir.menitcom.data.utils.Const
 import com.ferdifir.menitcom.data.utils.Helper
 import com.ferdifir.menitcom.domain.model.News
-import com.ferdifir.menitcom.ui.detail.DetailActivity
+import com.ferdifir.menitcom.presentation.detail.DetailActivity
 
 class NewsSliderAdapter(
     private val context: Context,
-    private var data: ArrayList<News>
+    private var data: List<News>
 ): PagerAdapter() {
 
     override fun getCount(): Int = 10

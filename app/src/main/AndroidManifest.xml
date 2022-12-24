@@ -21,20 +21,22 @@
             android:value="AIzaSyCLfXxDD5yCelkqGy5a7h7ZUp2400RF3n0" />
 
         <activity
-            android:name=".ui.explore.ExploreActivity"
+            android:name=".presentation.explore.ExploreActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".presentation.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true">
+            android:name=".presentation.SplashScreen"
+            android:exported="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.MainActivity" />
     </application>
 
 </manifest>

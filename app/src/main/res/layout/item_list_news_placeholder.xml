@@ -3,7 +3,7 @@
     android:layout_width="240dp"
     android:layout_height="250dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="0dp"
     app:cardCornerRadius="28dp"
     android:layout_margin="8dp">
 
@@ -14,10 +14,11 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_list_news"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="150dp"
             android:background="@android:color/white"
             android:scaleType="centerCrop"
             android:src="#DDDDDD"
+            app:riv_corner_radius="28dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="-20dp"
+            android:layout_marginTop="4dp"
+            app:cardElevation="0dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_list_news">
@@ -35,8 +37,8 @@
                 android:orientation="vertical">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="match_parent"
-                    android:layout_height="15sp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="18sp"
+                    android:layout_marginTop="14dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:src="#7F000000"
@@ -45,7 +47,7 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="match_parent"
                     android:layout_height="15sp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:src="#7F000000"

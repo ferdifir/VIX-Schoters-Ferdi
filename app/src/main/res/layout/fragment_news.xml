@@ -2,57 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="320dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.news.NewsFragment">
+    tools:context=".presentation.main.news.NewsFragment">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_latest_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/item_list_latest"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_list_discover_news"/>
 
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="4dp"
-        android:layout_gravity="bottom"/>
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shimmer_auto_start="true">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_list_latest_placeholder" />
-
-                <include layout="@layout/item_list_latest_placeholder" />
-
-                <include layout="@layout/item_list_latest_placeholder" />
-
-                <include layout="@layout/item_list_latest_placeholder" />
-
-            </LinearLayout>
-        </ScrollView>
-    </com.facebook.shimmer.ShimmerFrameLayout>
 </FrameLayout>
