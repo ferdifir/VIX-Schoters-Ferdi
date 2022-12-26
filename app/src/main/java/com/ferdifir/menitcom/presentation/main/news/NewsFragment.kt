@@ -1,6 +1,5 @@
 package com.ferdifir.menitcom.presentation.main.news
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.ferdifir.menitcom.data.ui.NewsAdapter
 import com.ferdifir.menitcom.data.ui.ViewModelFactory
 import com.ferdifir.menitcom.data.utils.Const
 import com.ferdifir.menitcom.databinding.FragmentNewsBinding
-import com.ferdifir.menitcom.presentation.detail.DetailActivity
 
 
 class NewsFragment : Fragment() {
@@ -50,9 +48,14 @@ class NewsFragment : Fragment() {
                     is Resource.Success -> {
                         //binding.progressBar.visibility = View.GONE
                         newsAdapter.onItemClick = { selectedNews ->
-                            val intent = Intent(activity, DetailActivity::class.java)
+                            /*val intent = Intent(activity, DetailActivity::class.java)
                             intent.putExtra(Const.EXTRA_NEWS, selectedNews)
-                            startActivity(intent)
+                            startActivity(intent)*/
+                            /*val action = NewsFragmentDirections.actionNavNewsToNavDetail(selectedNews)
+                            requireView().findNavController().navigate(action)*/
+                            /*val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment
+                            val navController = navHostFragment.findNavController()*/
+                            //navController.navigate(NewsFragmentDirections.actionNavNewsToNavDetail(selectedNews))
                         }
                         newsAdapter.setData(news.data)
                         with(binding.rvLatestNews) {
@@ -60,24 +63,6 @@ class NewsFragment : Fragment() {
                             setHasFixedSize(true)
                             adapter = newsAdapter
                         }
-
-                        /*newsSliderAdapter = NewsSliderAdapter(
-                            requireContext(),
-                            news.data as ArrayList<News>
-                        )
-                        binding.rvLatestNews.adapter = newsSliderAdapter
-                        binding.indicator.setViewPager(binding.rvLatestNews)
-                        val timer = Timer()
-                        timer.schedule(object : TimerTask() {
-                            override fun run() {
-                                Handler(Looper.getMainLooper()).post {
-                                    if (currentPage == news.data.size - 1) {
-                                        currentPage = 0
-                                    }
-                                    binding.rvLatestNews.setCurrentItem(currentPage++, true)
-                                }
-                            }
-                        }, DELAY_MS, PERIOD_MS)*/
                     }
                 }
             }

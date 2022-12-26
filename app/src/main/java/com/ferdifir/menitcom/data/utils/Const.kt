@@ -18,16 +18,22 @@ object Const {
         "technology"
     )
     val language = arrayOf(
-        "ar", "de", "en", "es", "fr", "he", "it", "nl", "no", "pt", "ru", "sv", "ud", "zh"
+        "en", "fr", "it", "nl", "ru"
     )
     val languageAdapter = arrayOf(
-        "Arabic", "German", "English", "French", "Hebrew", "Italian", "Dutch", "Norwegian", "Portugeese", "Russian", "Swedish", "Udmurt", "Chinese"
+        "English", "French", "Italian", "Dutch", "Russian"
+    )
+    val lang = mapOf(
+        "English" to "en", "French" to "fr", "Italian" to "it", "Dutch" to "nl", "Russian" to "ru"
     )
     val sortedBy = arrayOf(
         "relevancy", "popularity", "publishedAt"
     )
     val sortener = arrayOf(
         "Relevance", "Popularity", "Publish Date"
+    )
+    val sorter = mapOf(
+        "Relevance" to "relevancy", "Popularity" to "popularity", "Publish Date" to "publishedAt"
     )
     val date = arrayOf(
         "Today", "This week", "This month"

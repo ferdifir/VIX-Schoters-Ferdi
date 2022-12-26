@@ -17,16 +17,16 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class NewsRepository(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource,
-    private val searchPreferences: SearchPreferences,
-    private val appExecutors: AppExecutors
+    private val local: LocalDataSource,
+    private val remote: RemoteDataSource,
+    private val pref: SearchPreferences,
+    private val executors: AppExecutors
 ): INewsRepository {
 
     override fun getTopHeadlineNews(country: String, category: String): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override suspend fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getListNews(country, category).map {
+                return local.getListNews(country, category).map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -36,12 +36,12 @@ class NewsRepository(
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> {
-                return remoteDataSource.getTopHeadlineNews(country, category)
+                return remote.getTopHeadlineNews(country, category)
             }
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapTopNewsResponseToEntities(data, country, category)
-                localDataSource.insertNews(newsList)
+                local.insertNews(newsList)
             }
 
         }.asFlow()
@@ -50,13 +50,13 @@ class NewsRepository(
     override fun getSearchNews(): Flow<Resource<List<News>>> =
         object: NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override suspend fun loadFromDB(): Flow<List<News>> {
-                searchPreferences.getNewsQuery().first()
-                return localDataSource.getSearchNews(
-                    searchPreferences.getNewsQuery().first(),
-                    searchPreferences.getNewsCategory().first(),
+                pref.getNewsQuery().first()
+                return local.getSearchNews(
+                    pref.getNewsQuery().first(),
+                    pref.getNewsCategory().first(),
                     today.toString(),
-                    searchPreferences.getNewsDate().first(),
-                    searchPreferences.getNewsLanguage().first()
+                    pref.getNewsDate().first(),
+                    pref.getNewsLanguage().first()
                 ).map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
@@ -67,51 +67,51 @@ class NewsRepository(
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> {
-                return remoteDataSource.getSearchNews(
-                    searchPreferences.getNewsQuery().first(),
-                    searchPreferences.getNewsCategory().first(),
+                return remote.getSearchNews(
+                    pref.getNewsQuery().first(),
+                    pref.getNewsCategory().first(),
                     today.toString(),
-                    searchPreferences.getNewsDate().first(),
-                    searchPreferences.getNewsLanguage().first()
+                    pref.getNewsDate().first(),
+                    pref.getNewsLanguage().first()
                 )
             }
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapSearchNewsResponseToEntities(
                     data,
-                    searchPreferences.getNewsLanguage().first(),
-                    searchPreferences.getNewsCategory().first()
+                    pref.getNewsLanguage().first(),
+                    pref.getNewsCategory().first()
                 )
-                localDataSource.insertNews(newsList)
+                local.insertNews(newsList)
             }
 
         }.asFlow()
 
     override fun setBookmarkedNews(news: News, state: Boolean) {
         val newsEntity = DataMapper.mapDomainToEntity(news)
-        appExecutors.diskIO().execute { localDataSource.setBookmarkedNews(newsEntity, state) }
+        executors.diskIO().execute { local.setBookmarkedNews(newsEntity, state) }
     }
 
     override fun getBookmarkedNews(): Flow<List<News>> {
-        return localDataSource.getBookmarkedNews().map {
+        return local.getBookmarkedNews().map {
             DataMapper.mapEntitiesToDomain(it)
         }
     }
 
     override suspend fun saveSortPreferences(sortener: String) {
-        searchPreferences.saveSortPref(sortener)
+        pref.saveSortPref(sortener)
     }
 
     override suspend fun saveLanguagePreferences(language: String) {
-        searchPreferences.saveLanguagePref(language)
+        pref.saveLanguagePref(language)
     }
 
     override suspend fun saveDatePreferences(date: String) {
-        searchPreferences.saveDatePref(date)
+        pref.saveDatePref(date)
     }
 
     override suspend fun saveQueryPreferences(query: String) {
-        searchPreferences.saveSearchQuery(query)
+        pref.saveSearchQuery(query)
     }
 
     companion object {

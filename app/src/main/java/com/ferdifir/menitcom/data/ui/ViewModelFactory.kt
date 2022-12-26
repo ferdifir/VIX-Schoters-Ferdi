@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ferdifir.menitcom.data.di.Injection
 import com.ferdifir.menitcom.domain.usecase.NewsUseCase
-import com.ferdifir.menitcom.presentation.main.search.BookmarkViewModel
+import com.ferdifir.menitcom.presentation.main.bookmark.BookmarkViewModel
 import com.ferdifir.menitcom.presentation.detail.DetailViewModel
-import com.ferdifir.menitcom.presentation.explore.ExploreViewModel
+import com.ferdifir.menitcom.presentation.main.news.ExploreViewModel
 import com.ferdifir.menitcom.presentation.main.news.HomeViewModel
 
 class ViewModelFactory private constructor(private val newsUseCase: NewsUseCase) :

@@ -1,7 +1,6 @@
 package com.ferdifir.menitcom.data.ui
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,14 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.ferdifir.menitcom.R
-import com.ferdifir.menitcom.data.utils.Const
 import com.ferdifir.menitcom.domain.model.News
-import com.ferdifir.menitcom.presentation.detail.DetailActivity
 
 class NewsPagerAdapter(
     private val context: Context,
     private var newsList: List<News>
 ): PagerAdapter() {
+
+    var onItemClick: ((News) -> Unit)? = null
 
     override fun getCount(): Int = newsList.size
 
@@ -41,9 +40,7 @@ class NewsPagerAdapter(
                 .into(ivImage)
 
             btnView.setOnClickListener {
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra(Const.EXTRA_NEWS, news)
-                context.startActivity(intent)
+                onItemClick?.invoke(news)
             }
         }
 

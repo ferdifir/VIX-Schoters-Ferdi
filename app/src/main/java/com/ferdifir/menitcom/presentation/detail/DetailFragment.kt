@@ -7,46 +7,58 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.webkit.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ferdifir.menitcom.R
 import com.ferdifir.menitcom.data.ui.ViewModelFactory
 import com.ferdifir.menitcom.data.utils.Const
-import com.ferdifir.menitcom.databinding.ActivityDetailBinding
+import com.ferdifir.menitcom.databinding.FragmentDetailBinding
 import com.ferdifir.menitcom.domain.model.News
 
+class DetailFragment : Fragment() {
 
-class DetailActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityDetailBinding
-    private lateinit var detailNews: News
+    private lateinit var binding: FragmentDetailBinding
     private lateinit var viewModel: DetailViewModel
+    private lateinit var detailNews: News
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        overridePendingTransition(0, 0)
+        setHasOptionsMenu(true)
+    }
 
-        val factory = ViewModelFactory.getInstance(this)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val factory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
-        detailNews = intent.getParcelableExtra(Const.EXTRA_NEWS)!!
-
-        setSupportActionBar(binding.toolbarDetail)
-        supportActionBar?.title = detailNews.sourceName
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarDetail.setNavigationOnClickListener { onBackPressed() }
-        
         binding.swipeRefresh.setOnRefreshListener {
             binding.webView.reload()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            view.findNavController().navigateUp()
+        }
+
+        detailNews = args.detailNews
+        binding.toolbarDetail.title = detailNews.sourceName
 
         configWebView()
         loadWebsite(detailNews)
@@ -65,9 +77,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setStatusBookmark(statusBookmark: Boolean) {
         if (statusBookmark) {
-            binding.btnBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark))
+            binding.btnBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark))
         } else {
-            binding.btnBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_border))
+            binding.btnBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border))
         }
     }
 
@@ -79,10 +91,9 @@ class DetailActivity : AppCompatActivity() {
             useWideViewPort = true
             loadsImagesAutomatically = true
             cacheMode = WebSettings.LOAD_NO_CACHE
-            setRenderPriority(WebSettings.RenderPriority.HIGH)
-            setEnableSmoothTransition(true)
             domStorageEnabled = true
         }
+        binding.webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
     }
 
     private fun loadWebsite(data: News?) {
@@ -108,43 +119,61 @@ class DetailActivity : AppCompatActivity() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 binding.progress.visibility = View.GONE
+                binding.swipeRefresh.isRefreshing = false
+            }
+
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                if (request != null) {
+                    if (request.url.host?.let { Regex(".*\\.ad$|.*\\.ads$").matches(it) } == true ||
+                        request.url.host!!.endsWith("adserver.com") ||
+                        request.url.host!!.endsWith("ads.com") ||
+                        request.url.host!!.endsWith("adserver2.com") ||
+                        request.url.host!!.endsWith("doubleclick.com") ||
+                        request.url.host!!.endsWith("googlesyndication.com") ||
+                        request.url.host!!.endsWith("iklandisini.com")
+                    ) {
+                        return WebResourceResponse("text/plain", "utf-8", null)
+                    }
+                }
+                return super.shouldInterceptRequest(view, request)
             }
         }
         binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         if (data != null) {
-            binding.webView.loadUrl(data.url!!)
+            binding.webView.loadUrl(data.url)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_detail_menu, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_detail_menu, menu)
     }
 
-    @Suppress("DEPRECATION")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.share -> {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
                 val body = getString(R.string.UI_share_body, detailNews.title)
                 intent.putExtra(Intent.EXTRA_TEXT, body)
                 startActivity(Intent.createChooser(intent, getString(R.string.UI_share_title)))
-                return true
+                true
             }
             R.id.copy_link -> {
-                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText(Const.COPY_TO_CLIPBOARD, detailNews.url)
                 clipboard.setPrimaryClip(clip)
-                Toast.makeText(this, getString(R.string.UI_copy_text), Toast.LENGTH_SHORT).show()
-                return true
+                Toast.makeText(context, getString(R.string.UI_copy_text), Toast.LENGTH_SHORT).show()
+                true
             }
             R.id.open_in_browser -> {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(detailNews.url))
-                this.startActivity(intent)
+                requireActivity().startActivity(intent)
                 return true
             }
-            else -> super.onOptionsItemSelected(item)
+            else -> false
         }
     }
 

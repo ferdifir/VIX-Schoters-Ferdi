@@ -22,4 +22,12 @@
         android:name="com.ferdifir.menitcom.presentation.weather.WeatherFragment"
         android:label="Weather"
         tools:layout="@layout/fragment_weather" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.ferdifir.menitcom.presentation.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_profile" />
+
+    <include app:graph="@navigation/bottom_navigation_view"/>
 </navigation>

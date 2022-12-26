@@ -39,14 +39,10 @@ class MainFragment : Fragment() {
             when(destination.id) {
                 R.id.nav_home -> binding.bottomNavView.visibility = View.VISIBLE
                 R.id.nav_search -> binding.bottomNavView.visibility = View.VISIBLE
-                R.id.nav_profile -> binding.bottomNavView.visibility = View.VISIBLE
+                R.id.nav_bookmark -> binding.bottomNavView.visibility = View.VISIBLE
                 else -> binding.bottomNavView.visibility = View.GONE
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

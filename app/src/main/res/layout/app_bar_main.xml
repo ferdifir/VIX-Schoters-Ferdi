@@ -12,6 +12,8 @@
         android:elevation="20dp"
         android:background="@android:color/transparent" />
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/content"
+        layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

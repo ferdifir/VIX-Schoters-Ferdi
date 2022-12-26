@@ -1,6 +1,5 @@
 package com.ferdifir.menitcom.presentation.main.news
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ferdifir.menitcom.data.source.Resource
@@ -19,14 +19,12 @@ import com.ferdifir.menitcom.data.ui.ViewModelFactory
 import com.ferdifir.menitcom.data.ui.WorldNewsAdapter
 import com.ferdifir.menitcom.data.utils.Const
 import com.ferdifir.menitcom.databinding.FragmentHomeBinding
-import com.ferdifir.menitcom.presentation.detail.DetailActivity
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var newsAdapter: WorldNewsAdapter
     private lateinit var viewModel: HomeViewModel
     private lateinit var newsSliderAdapter: NewsPagerAdapter
@@ -37,7 +35,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -57,13 +55,22 @@ class HomeFragment : Fragment() {
                 when(news) {
                     is Resource.Loading -> {
                         binding.loading.visibility = View.VISIBLE
+                        binding.viewPager.visibility = View.GONE
                         binding.loading.startShimmer()
                     }
-                    is Resource.Error -> binding.loading.visibility = View.GONE
+                    is Resource.Error -> {
+                        binding.loading.visibility = View.GONE
+                        binding.viewPager.visibility = View.GONE
+                    }
                     is Resource.Success -> {
                         binding.loading.visibility = View.GONE
+                        binding.viewPager.visibility = View.VISIBLE
                         if (news.data != null) {
                             newsSliderAdapter = NewsPagerAdapter(requireContext(), news.data)
+                            newsSliderAdapter.onItemClick = {
+                                val action = HomeFragmentDirections.actionNavHomeToNavDetail(it)
+                                requireView().findNavController().navigate(action)
+                            }
                             binding.viewPager.adapter = newsSliderAdapter
                             val timer = Timer()
                             timer.schedule(object : TimerTask() {
@@ -86,9 +93,8 @@ class HomeFragment : Fragment() {
     private fun setAdapter() {
         newsAdapter = WorldNewsAdapter()
         newsAdapter.onItemClick = { selectedNews ->
-            val intent = Intent(activity, DetailActivity::class.java)
-            intent.putExtra(Const.EXTRA_NEWS, selectedNews)
-            startActivity(intent)
+            val action = HomeFragmentDirections.actionNavHomeToNavDetail(selectedNews)
+            requireView().findNavController().navigate(action)
         }
         with(binding.rvBreakingNews) {
             layoutManager = GridLayoutManager(context, 1, RecyclerView.HORIZONTAL, false)
@@ -102,20 +108,19 @@ class HomeFragment : Fragment() {
         viewModel.getTopNews(country, category).observe(viewLifecycleOwner) { news ->
             if (news != null) {
                 when(news) {
-                    is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                    is Resource.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.rvBreakingNews.visibility = View.GONE
+                    }
                     is Resource.Error -> binding.progressBar.visibility = View.GONE
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
+                        binding.rvBreakingNews.visibility = View.VISIBLE
                         newsAdapter.setData(news.data)
                     }
                 }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

@@ -9,18 +9,62 @@
         android:id="@+id/nav_home"
         android:name="com.ferdifir.menitcom.presentation.main.news.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_detail"
+            app:destination="@id/nav_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_search"
         android:name="com.ferdifir.menitcom.presentation.main.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_nav_search_to_nav_filter"
+            app:destination="@id/nav_filter" />
+        <action
+            android:id="@+id/action_nav_search_to_nav_detail"
+            app:destination="@id/nav_detail" />
+        <argument
+            android:name="sortener"
+            app:argType="string" />
+        <argument
+            android:name="language"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_profile"
-        android:name="com.ferdifir.menitcom.presentation.main.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/nav_bookmark"
+        android:name="com.ferdifir.menitcom.presentation.main.bookmark.BookmarkFragment"
+        android:label="Bookmark"
+        tools:layout="@layout/fragment_bookmark" >
+        <action
+            android:id="@+id/action_nav_bookmark_to_nav_detail"
+            app:destination="@id/nav_detail" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/nav_filter"
+        android:name="com.ferdifir.menitcom.presentation.main.search.FilterFragment"
+        android:label="Bookmark"
+        tools:layout="@layout/fragment_filter" >
+        <action
+            android:id="@+id/action_nav_filter_to_nav_search"
+            app:destination="@id/nav_search" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/nav_detail"
+        android:name="com.ferdifir.menitcom.presentation.detail.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="detailNews"
+            app:argType="com.ferdifir.menitcom.domain.model.News" />
+    </fragment>
 
 </navigation>

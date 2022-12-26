@@ -1,4 +1,4 @@
-package com.ferdifir.menitcom.presentation.main.profile
+package com.ferdifir.menitcom.presentation.about
 
 import android.os.Bundle
 import android.view.LayoutInflater

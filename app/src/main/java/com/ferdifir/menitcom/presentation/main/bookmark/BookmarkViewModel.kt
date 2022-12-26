@@ -1,4 +1,4 @@
-package com.ferdifir.menitcom.presentation.main.search
+package com.ferdifir.menitcom.presentation.main.bookmark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

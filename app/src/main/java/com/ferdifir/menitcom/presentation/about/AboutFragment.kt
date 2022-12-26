@@ -1,4 +1,4 @@
-package com.ferdifir.menitcom.presentation.main.profile
+package com.ferdifir.menitcom.presentation.about
 
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +14,7 @@ import com.ferdifir.menitcom.data.utils.Const.myLinkedin
 import com.ferdifir.menitcom.databinding.FragmentProfileBinding
 
 
-class ProfileFragment : Fragment() {
+class AboutFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!

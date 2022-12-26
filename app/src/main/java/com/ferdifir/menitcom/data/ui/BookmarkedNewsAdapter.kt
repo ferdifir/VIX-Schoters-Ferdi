@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ferdifir.menitcom.databinding.ItemListDiscoverNewsBinding
+import com.ferdifir.menitcom.databinding.ItemListNewsBinding
 import com.ferdifir.menitcom.domain.model.News
 
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
+class BookmarkedNewsAdapter: RecyclerView.Adapter<BookmarkedNewsAdapter.ListViewHolder>() {
 
     private var listData = ArrayList<News>()
     var onItemClick: ((News) -> Unit)? = null
@@ -20,7 +20,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = ItemListDiscoverNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemListNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(view)
     }
 
@@ -32,14 +32,14 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
         return listData.size
     }
 
-    inner class ListViewHolder(private val binding: ItemListDiscoverNewsBinding)
+    inner class ListViewHolder(private val binding: ItemListNewsBinding)
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: News) {
             with(binding) {
-                tvTitleNews.text = data.title
+                tvListTitle.text = data.title
                 Glide.with(itemView.context)
                     .load(data.urlToImage)
-                    .into(ivListImage)
+                    .into(ivListNews)
             }
         }
         init {
@@ -48,5 +48,4 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
             }
         }
     }
-
 }
