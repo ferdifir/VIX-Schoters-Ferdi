@@ -12,7 +12,11 @@ This is an Android news app that displays the latest news articles from around t
 
 ## Screenshots
 
-Include some screenshots of your app here to give users an idea of what it looks like.
+<img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/1.jpg" width="160" height="auto"> <img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/2.jpg" width="160" height="auto">
+<img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/3.jpg" width="160" height="auto">
+<img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/4.jpg" width="160" height="auto">
+<img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/5.jpg" width="160" height="auto">
+<img src="https://github.com/ferdifir/VIX-Schoters-Ferdi/blob/master/image/6.jpg" width="160" height="auto">
 
 ## Getting Started
 
@@ -20,7 +24,7 @@ To get started with the app, follow these steps:
 
 1. Clone the repository:
 
-  ```git clone https://github.com/ferdifir/VIX-Schoters-Ferdi.git```
+    ```git clone https://github.com/ferdifir/VIX-Schoters-Ferdi.git```
 
 2. Obtain an API key from News API:
 
@@ -57,4 +61,4 @@ The app uses the following libraries and frameworks:
 
 ### Logo
 
-logo designed by [Irham Andaiman](https://www.behance.net/irhamandaiman)
+The logo on the Splash Screen designed by [Irham Andaiman](https://www.behance.net/irhamandaiman)
